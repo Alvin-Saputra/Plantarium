@@ -7,11 +7,11 @@ const apiClient = axios.create({
 });
 
 // 2. Fungsi untuk mengambil data plant berdasarkan beberapa parameter
-export const getWeatherByCity = async (indoor, watering) => {
+export const getPlantList= async (indoor, watering, sunlight) => {
     try {
 
         const response = await apiClient.get('/species-list', {
-            params: { indoor: indoor, watering: watering },
+            params: { indoor: indoor, watering: watering, sunlight:sunlight },
         });
         return response.data;
 
