@@ -29,10 +29,10 @@ const props = defineProps({
 });
 const value = ref(0);
 
-const emit = defineEmits(['update-active']);
+const emit = defineEmits(['update-value']);
 
 watch(value, (newValue) => {
-    emit('update-active', newValue)
+    emit('update-value', newValue)
 });
 
 </script>
