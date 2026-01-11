@@ -1,4 +1,5 @@
 <script setup>
+const model = defineModel({ type: Boolean, default: false });
 const props = defineProps({
     toggleLabels: {
         type: String,
@@ -11,7 +12,7 @@ const props = defineProps({
 
 <template>
     <div>
-        <v-switch :label="toggleLabels" inset></v-switch>
+        <v-switch v-model="model" :label="toggleLabels" inset></v-switch>
     </div>
 </template>
 
