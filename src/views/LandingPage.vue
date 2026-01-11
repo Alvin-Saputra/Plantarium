@@ -30,7 +30,6 @@
 
 .landing-wrapper h1 {
     font-weight: 400;
-
 }
 
 .landing-wrapper p {

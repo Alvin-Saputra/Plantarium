@@ -15,7 +15,7 @@ const emit = defineEmits(['update-active']);
 const menus = [
     { title: 'Home', id: 'home', href: '/' },
     { title: 'Explore', id: 'explore', href: '/explore' },
-    { title: 'Identify', id: 'identify', href: '#projects' },
+    { title: 'Identify', id: 'identify', href: '/identify' },
 ];
 </script>
 
@@ -23,7 +23,7 @@ const menus = [
     <header>
         <div class="flex justify-center">
 
-            <v-btn v-for="item in menus" :key="item.id" :href="item.href"
+            <v-btn v-for="item in menus" :key="item.id" :to="item.href"
                 :variant="props.active === item.id ? 'tonal' : 'text'"
                 :color="props.active === item.id ? 'green-darken-1' : undefined" rounded="xl"
                 @click="$emit('update-active', item.id)">

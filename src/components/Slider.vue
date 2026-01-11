@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-
+import { watch } from 'vue';
 const props = defineProps({
     min: {
         type: Number,
@@ -12,6 +12,18 @@ const props = defineProps({
         type: Number,
         required: true,
         default: 5 // Nilai default jika parent tidak mengirim apa-apa
+    },
+
+    label: {
+        type: String,
+        required: false,
+        default: "Slider"
+    },
+
+    tickLabel: {
+        type: Object,
+        required: false,
+        default: undefined
     },
 
 });
@@ -26,7 +38,10 @@ watch(value, (newValue) => {
 </script>
 
 <template>
-    <v-slider v-model="value" :max="props.max" :min="props.min" :step="1" thumb-label></v-slider>
+    <div class="slider-wrapper">
+    <h5 class="text-xl ">{{ props.label }}</h5>
+    <v-slider v-model="value" :max="props.max" :min="props.min" :step="1" :ticks="tickLabel" show-ticks="always"></v-slider>
+    </div>
 </template>
 
 
