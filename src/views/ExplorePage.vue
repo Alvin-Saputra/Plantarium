@@ -5,6 +5,8 @@ import PlantCard from '@/components/PlantCard.vue';
 import { ref } from 'vue';
 import { getPlantList } from '@/service/plant-service';
 import loadingAnim from '@/assets/animation/loadingAnim.json';
+import NoData from '@/assets/animation/NoData.json';
+import PlantJump from '@/assets/animation/PlantJump.json';
 
 const wateringFreqLabels = {
     0: 'None',
@@ -41,8 +43,10 @@ const isIndoor = ref(false);
 
 const plantData = ref(null);
 const isSearch = ref(false);
+const hasSearch = ref(false);
 
 const handleSearch = async () => {
+    hasSearch.value = true;
     plantData.value = null;
     const wateringQuery = wateringApiValues[wateringLevel.value];
     const sunlightQuery = sunlightApiValues[sunlightLevel.value];
@@ -104,9 +108,18 @@ const handleSearch = async () => {
                     </v-card>
                 </v-col>
 
-                <v-col cols="12" md="6" class="flex-col justify-center">
-                    <Vue3Lottie v-if="isSearch" :animationData="loadingAnim" :height="400" :width="400" />
-                    <PlantCard v-else v-for="item in plantData?.data" :key="item.id" :title="item.common_name"
+                <v-col v-if="isSearch" cols="12" md="6" class="flex-col justify-center items-center">
+                    <Vue3Lottie :animationData="PlantJump" :height="500" :width="500" />
+                </v-col>
+
+                    <v-col v-else-if="!isSearch && hasSearch && plantData.data.length == 0" cols="12" md="6" class="flex-col justify-center items-center">
+                   <Vue3Lottie :animationData="NoData" :height="500" :width="500" />
+                    <!-- <h1>No Data</h1> -->
+                </v-col>
+
+                <v-col v-else cols="12" md="6" class="flex-col justify-center">
+
+                    <PlantCard v-for="item in plantData?.data" :key="item.id" :title="item.common_name"
                         :scientific-name="item.scientific_name?.[0]" :image-url="item.default_image?.medium_url"
                         class="mt-8 mb-8" />
                 </v-col>
